@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Eramine - Main Menu</title>
+
+  <!-- Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =======================
+       PALETA / VARIABLES
+       ======================= */
+    :root {
+      --ink: #1A003B;
+      --lemon: #FBF315;
+      --orange: #FA6414;
+      --indigo: #6D1ADC;
+      --navy: #182C53;
+      --muted: #DEDAE7;
+      --muted-2: #EEA300;
+      --steel: #527594;
+      --gold: #EEA300;
+      --rust: #C84018;
+      --slate: #515793;
+      --line: #E6E6EE;
+      --bg: #f7f8fb;
+      --white: #fff;
+      --bright-yellow: #EBD323;
+      /* color adicional de la paleta */
+      /* Gradients */
+      --grad-1: linear-gradient(135deg, #FBF315, #FA6414);
+      --grad-2: linear-gradient(135deg, #6D1ADC, #182C53);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      line-height: 1.35;
+    }
+
+    /* =======================
+       LAYOUT
+       ======================= */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Header principal */
+    .site-header {
+      background: var(--grad-2);
+      color: var(--white);
+      padding: 18px 20px;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, .15);
+      width: 100%;
+    }
+
+    .site-title {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: .4px;
+    }
+
+    /* =======================
+       SECCIÓN CENTRAL (KPIs)
+       ======================= */
+    .kpi-wrap {
+      margin: 18px auto 10px;
+      width: min(1200px, 95%);
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+      overflow: hidden;
+    }
+
+    /* Replaced top message & brand with a single English title */
+    .kpi-header {
+      background: var(--grad-2);
+      color: var(--white);
+      text-align: center;
+      padding: 12px 14px;
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .kpi-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 4px solid var(--navy);
+      border-bottom: 2px solid var(--navy);
+      background: var(--muted-2);
+      color: var(--navy);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: .9rem;
+    }
+
+    .kpi-tabs div {
+      padding: 10px 6px;
+      text-align: center;
+      border-left: 1px solid rgba(0, 0, 0, .08);
+    }
+
+    .kpi-tabs div:first-child {
+      border-left: none
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      padding: 0;
+    }
+
+    /* Centered mode for single objective */
+    .kpi-tabs.centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .kpi-tabs.centered div { border-left: none; }
+
+    .kpi-grid.centered {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .kpi-grid.centered .kpi-card {
+      max-width: 340px;
+      width: 100%;
+      text-align: center;
+      border-right: none;
+    }
+
+    .kpi-card {
+      border-right: 1px solid var(--line);
+      padding: 18px 16px 22px;
+      min-height: 140px;
+    }
+
+    .kpi-card:last-child {
+      border-right: none
+    }
+
+    .kpi-icon {
+      font-size: 26px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .kpi-title {
+      font-weight: 700;
+      margin: 4px 0 8px;
+      color: #111;
+    }
+
+    .kpi-text {
+      font-size: .95rem;
+      color: #222;
+    }
+
+    .kpi-strong {
+      display: block;
+      font-weight: 700;
+      margin-top: 6px;
+    }
+
+    /* =======================
+       ÁREAS Y SUBÁREAS
+       ======================= */
+    .areas-wrap {
+      width: min(1200px, 95%);
+      margin: 18px auto;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* was 4 → now 5 to fit Key Dashboards */
+      gap: 18px;
+    }
+
+    .group {
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .06);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .group-head {
+      padding: 16px 12px;
+      color: var(--white);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .group.offsite .group-head {
+      background: var(--grad-2);
+    }
+
+    .group.utilities .group-head {
+      background: var(--grad-1);
+      color: #111;
+    }
+
+    .group.upstream .group-head {
+      background: linear-gradient(135deg, var(--steel), var(--navy));
+    }
+
+    .group.downstream .group-head {
+      background: linear-gradient(135deg, var(--gold), var(--rust));
+    }
+
+    .sublist {
+      padding: 10px 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .subitem {
+      position: relative;
+      background: var(--muted);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .15s ease;
+      border: 1px solid rgba(0, 0, 0, .06);
+    }
+
+    .subitem:hover {
+      background: var(--bright-yellow);
+    }
+
+    /* Tooltip / menú flotante */
+    .flyout {
+      position: absolute;
+      top: 0;
+      left: calc(100% + 8px);
+      width: 300px;
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+      border: 1px solid var(--line);
+      padding: 12px 12px 8px;
+      display: none;
+      z-index: 30;
+    }
+
+    .flyout.no-arrow:before {
+      display: none;
+    }
+
+    .flyout:before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      top: 14px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent var(--white) transparent transparent;
+      filter: drop-shadow(-1px 1px 0 rgba(0, 0, 0, .08));
+    }
+
+    .flyout h4 {
+      margin: 0 0 10px;
+      font-size: .95rem;
+      color: var(--navy);
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 6px;
+    }
+
+    .flyout ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .flyout li+li {
+      margin-top: 8px;
+    }
+
+    .flyout a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .flyout a:hover {
+      color: var(--orange);
+    }
+
+    /* Botón General centrado - estilo similar a OFF-SITE */
+    .general-zone {
+      display: flex;
+      justify-content: center;
+      margin: 16px 0 8px;
+      width: 100%;
+      gap: 12px;          /* added to space multiple buttons */
+      flex-wrap: wrap;    /* allow wrapping on small screens */
+    }
+
+    .btn-general {
+      background: var(--grad-2);
+      color: var(--white);
+      border: none;
+      border-radius: 14px;
+      padding: 14px 28px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, .15);
+      transition: transform .12s ease;
+      font-size: 1rem;
+    }
+
+    .btn-general:hover {
+      transform: translateY(-2px)
+    }
+
+    /* Key Dashboards (new) */
+    .key-dashboards {
+      background: var(--indigo);
+      color: var(--white);
+      border-radius: 14px;
+      padding: 16px 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+    }
+
+    .key-head {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0 0 12px;
+      border-bottom: 2px solid var(--lemon);
+      padding-bottom: 6px;
+    }
+
+    .key-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .key-list a {
+      color: var(--white);
+      font-weight: 600;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .08);
+      transition: background .2s ease;
+    }
+
+    .key-list a:hover {
+      background: var(--lemon);
+      color: var(--ink);
+    }
+
+    /* Buscador al final */
+    .search-zone {
+      width: min(1100px, 90%);
+      margin: 16px auto 28px;
+      background: var(--white);
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, .06);
+      padding: 16px;
+    }
+
+    .search-head {
+      font-weight: 700;
+      margin: 0 0 10px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1 1 320px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      font-size: 1rem;
+    }
+
+    .results {
+      margin-top: 12px;
+      border-top: 1px dashed var(--line);
+      padding-top: 10px;
+      display: none;
+    }
+
+    .results ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .results li {
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f0f5;
+    }
+
+    .results a {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .results a:hover {
+      color: var(--orange);
+    }
+
+    /* =======================
+       RESPONSIVE
+       ======================= */
+    @media (max-width:1100px) {
+
+      .kpi-grid,
+      .kpi-tabs {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .kpi-card:nth-child(3) {
+        border-right: none
+      }
+    }
+
+    @media (max-width:840px) {
+      .areas-wrap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .kpi-grid,
+      .kpi-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .kpi-card {
+        border-right: 1px solid var(--line)
+      }
+
+      .kpi-card:nth-child(2n) {
+        border-right: none
+      }
+    }
+
+    @media (max-width:560px) {
+      .areas-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid,
+      .kpi-tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-card {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .kpi-card:last-child {
+        border-bottom: none;
+      }
+
+      .flyout {
+        left: auto;
+        right: 0;
+        top: calc(100% + 8px);
+      }
+
+      .flyout:before {
+        left: auto;
+        right: 14px;
+        top: -16px;
+        border-color: transparent transparent var(--white) transparent;
+      }
+    }
+  .chart-wrap{width:min(1200px,95%);margin:10px auto 4px;padding:12px;background:var(--white);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .chart-legend{width:min(1200px,95%);margin:6px auto 16px;display:flex;gap:18px;align-items:center;justify-content:center;color:#222;font-weight:600}
+    .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle}
+    .dot-daily{background:var(--orange)}
+    .dot-cum{background:var(--indigo)}
+    .dot-target{background:var(--lemon);border:1px solid var(--navy)}
+    .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle}
+    .dot-daily{background:var(--orange)}
+    .dot-cum{background:var(--indigo)}
+    .dot-target{background:var(--lemon);border:1px solid var(--navy)}
+
+  </style>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">SARRAZIN-CAILLET Alexandre (EXT)</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:Order msdt:dt="string">637300.000000000</mso:Order>
+<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
+<mso:SharedWithUsers msdt:dt="string"></mso:SharedWithUsers>
+<mso:_ExtendedDescription msdt:dt="string"></mso:_ExtendedDescription>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">SARRAZIN-CAILLET Alexandre (EXT)</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
+<mso:ContentTypeId msdt:dt="string">0x010100AF267F91ED337148A2EDFDF18C6E4240</mso:ContentTypeId>
+<mso:TriggerFlowInfo msdt:dt="string"></mso:TriggerFlowInfo>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+<mso:TaxCatchAll msdt:dt="string"></mso:TaxCatchAll>
+<mso:MediaServiceImageTags msdt:dt="string"></mso:MediaServiceImageTags>
+<mso:lcf76f155ced4ddcb4097134ff3c332f msdt:dt="string"></mso:lcf76f155ced4ddcb4097134ff3c332f>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <header class="site-header">
+      <h1 class="site-title">Eramine – Main Menu</h1>
+    </header>
+
+    <!-- SECCIÓN CENTRAL (tipo imagen) -->
+    <section class="kpi-wrap" aria-label="Main objective">
+      <div class="kpi-header">ERAMINE - Main Objective</div>
+
+      <div class="kpi-tabs centered" role="tablist">
+        <div>Producción</div>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="prodChart" height="160" aria-label="Daily bagged production, cumulative and monthly target"></canvas>
+      </div>
+
+      <div class="chart-legend">
+        <span class="dot dot-daily"></span> Producción diaria
+        <span class="dot dot-cum"></span> Acumulado
+        <span class="dot dot-target"></span> Objetivo del mes
+      </div>
+    </section>
+
+    <!-- ÁREAS Y SUBÁREAS -->
+    <section class="areas-wrap" aria-label="Areas operativas">
+      <!-- MAINTENANCE -->
+      <div class="group offsite">
+        <div class="group-head">MAINTENANCE</div>
+        <div class="sublist">
+          <div class="subitem" data-key="MTNSUB1">Subarea 1</div>
+          <div class="subitem" data-key="MTNSUB2">Subarea 1</div>
+          <div class="subitem" data-key="MTNSUB3">Subarea 1</div>
+        </div>
+      </div>
+
+      <!-- UTILITIES -->
+      <div class="group utilities">
+        <div class="group-head">UTILITIES AREA</div>
+        <div class="sublist">
+          <div class="subitem" data-key="Utilities-General">Utilities General</div>
+          <div class="subitem" data-key="4111">4111/4112 NaOH Preparation and Storage</div>
+          <div class="subitem" data-key="4120">4120 HCI Storage</div>
+          <div class="subitem" data-key="4130">4130 Na2CO3, Dilution and Storage</div>
+          <div class="subitem" data-key="5110">5110/5210 Water Containment / Tank Farm</div>
+          <div class="subitem" data-key="1440">1440 Waste Water / Treatment Plant</div>
+          <div class="subitem" data-key="4200">4200 Power Plant</div>
+          <div class="subitem" data-key="4400">4400 Compressed Air Plant</div>
+          <div class="subitem" data-key="4500">4500 Cooling Water System</div>
+          <div class="subitem" data-key="6200">6200 Water wells</div>
+          <div class="subitem" data-key="6400">6400 Natural Gas Pipeline</div>
+        </div>
+      </div>
+
+      <!-- UPSTREAM -->
+      <div class="group upstream">
+        <div class="group-head">UPSTREAM PLANT - 2000</div>
+        <div class="sublist">
+          <div class="subitem" data-key="2140">2140 Solid Waste Stabilization</div>
+          <div class="subitem" data-key="2230">2230 Depleted Brine Treatment</div>
+          <div class="subitem" data-key="6100">6100 Depleted Brine Lagoon</div>
+          <div class="subitem" data-key="2110">2110 Brine Oxidation</div>
+          <div class="subitem" data-key="2120">2120 Brine Filtration</div>
+          <div class="subitem" data-key="2130">2130 CO2 Stripping</div>
+          <div class="subitem" data-key="2210">2210/2220 Lithium Direct Extraction</div>
+          <div class="subitem" data-key="2310">2310 Nanofiltration</div>
+          <div class="subitem" data-key="2360">2360 Ion Exchange upstream</div>
+          <div class="subitem" data-key="2320">2320 Reverse Osmosis</div>
+          <div class="subitem" data-key="6300">6300 Brine Wells</div>
+        </div>
+      </div>
+
+      <!-- DOWNSTREAM -->
+      <div class="group downstream">
+        <div class="group-head">DOWNSTREAM PLANT - 3000</div>
+        <div class="sublist">
+          <div class="subitem" data-key="2500">2500 Boron Solvent Extraction</div>
+          <div class="subitem" data-key="3110a">3110 As Removal</div>
+          <div class="subitem" data-key="3110b">3110 Ion Exchange Ca/Mg</div>
+          <div class="subitem" data-key="3310">3310 Li2CO3, Precipitation</div>
+          <div class="subitem" data-key="3410">3410 Li2CO3, Centrifugation</div>
+          <div class="subitem" data-key="3420">3420 Li2CO3, Dryer</div>
+          <div class="subitem" data-key="3430">3430 Li2CO3, Micronization</div>
+          <div class="subitem" data-key="3510">3510 Li2CO3 Packaging and Storage</div>
+          <div class="subitem" data-key="3210">3210 Na2CO3 Purification</div>
+        </div>
+      </div>
+
+      <!-- KEY DASHBOARDS (new column) -->
+      <section class="key-dashboards">
+        <h2 class="key-head">Key Dashboards</h2>
+        <ul class="key-list">
+          <li><a href="#/dash/site/production-overview">Production Overview</a></li>
+          <li><a href="#/dash/site/water-balance">Water Balance</a></li>
+          <li><a href="#/dash/site/energy">Energy Consumption</a></li>
+          <li><a href="#/dash/site/maintenance-kpis">Maintenance KPIs</a></li>
+          <li><a href="#/dash/site/safety">Safety Incidents</a></li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- Botón General + nuevos botones -->
+    <div class="general-zone">
+      <button class="btn-general" data-key="training">TRAINING CENTER</button>
+      <button class="btn-general" id="btnGeneral">GENERAL</button>
+      <button class="btn-general" data-key="quality">QUALITY</button>
+      <button class="btn-general" data-key="lab">LABORATORY</button>
+    </div>
+
+    <!-- Buscador de dashboards -->
+    <section class="search-zone" aria-label="Dashboard search">
+      <h3 class="search-head">Search dashboards</h3>
+      <div class="search-row">
+        <input class="search-input" id="searchInput" type="text" placeholder="Type the name of the dashboard..." />
+      </div>
+      <div class="results" id="resultsBox">
+        <ul id="resultsList"></ul>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    // =======================
+    // DATA: dashboards por subárea (links de ejemplo)
+    // =======================
+    const menus = {
+      "MTNSUB1": {
+        title: "MTNSUB1", links: [
+          { text: "Sample 1", href: "#/dash/4111/stock" },
+          { text: "Sample 2", href: "#/dash/4111/consumo" }
+        ]
+      },
+      "MTNSUB2": {
+        title: "MTNSUB2", links: [
+          { text: "Sample 3", href: "#/dash/4111/stock" },
+          { text: "Sample 4", href: "#/dash/4111/consumo" }
+        ]
+      },
+      "MTNSUB3": {
+        title: "MTNSUB3", links: [
+          { text: "Sample 5", href: "#/dash/4111/stock" },
+          { text: "Sample 6", href: "#/dash/4111/consumo" }
+        ]
+      },
+      "Utilities-General": {
+        title: "Utilities General", links: [
+          { text: "Control UTILITIES", href: "https://eramet-industry.oianalytics.fr/dashboards/84e4f0b4-4238-494f-9d33-b8ef46184882" },
+        ]
+      },
+      "4111": {
+        title: "4111/4112 NaOH", links: [
+          { text: "Preparación y Stock", href: "#/dash/4111/stock" },
+          { text: "Consumo por Unidad", href: "#/dash/4111/consumo" }
+        ]
+      },
+      "4120": {
+        title: "4120 HCl Storage", links: [
+          { text: "Inventario de Tanques", href: "#/dash/4120/inventario" },
+          { text: "Alarmas y Eventos", href: "#/dash/4120/alarmas" }
+        ]
+      },
+      "4130": {
+        title: "4130 Na2CO3 Dilution", links: [
+          { text: "Dilución y Conductividad", href: "#/dash/4130/dilucion" },
+          { text: "Trazabilidad", href: "#/dash/4130/trazabilidad" }
+        ]
+      },
+      "5110": {
+        title: "5110/5210 Tank Farm", links: [
+          { text: "Niveles y Capacidades", href: "#/dash/5110/niveles" },
+          { text: "Balance Hídrico", href: "#/dash/5110/balance" }
+        ]
+      },
+      "1440": {
+        title: "1440 Waste Water / Treatment", links: [
+          { text: "Parámetros Efluente", href: "#/dash/1440/efluente" },
+          { text: "Cumplimiento Normativo", href: "#/dash/1440/cumplimiento" }
+        ]
+      },
+      "4200": {
+        title: "4200 Power Plant", links: [
+          { text: "Generación (kWh)", href: "#/dash/4200/generacion" },
+          { text: "Consumo de Fuel", href: "#/dash/4200/consumo-fuel" }
+        ]
+      },
+      "4400": {
+        title: "4400 Compressed Air Plant", links: [
+          { text: "Presión y Demanda", href: "#/dash/4400/presion-demanda" },
+          { text: "Eficiencia Compresores", href: "#/dash/4400/eficiencia" }
+        ]
+      },
+      "4500": {
+        title: "4500 Cooling Water", links: [
+          { text: "Temperatura y Caudal", href: "#/dash/4500/temp-caudal" },
+          { text: "Calidad y Corrosión", href: "#/dash/4500/calidad" }
+        ]
+      },
+      "6200": {
+        title: "6200 Water wells", links: [
+          { text: "Nivel de Agua (Tiempo Real)", href: "#/dash/6200/nivel-agua" },
+        { text: "Caudal y Consumo", href: "#/dash/6200/caudal-consumo" },
+          { text: "Calidad de Agua", href: "#/dash/6200/calidad" }
+        ]
+      },
+      "6400": {
+        title: "6400 Natural Gas Pipeline", links: [
+          { text: "Presión y Flujo", href: "#/dash/6400/presion-flujo" },
+          { text: "Balance Energético", href: "#/dash/6400/balance" }
+        ]
+      },
+      "2140": {
+        title: "2140 Solid Waste Stabilization", links: [
+          { text: "Residuos Tratados", href: "#/dash/2140/tratados" },
+          { text: "Indicadores Ambientales", href: "#/dash/2140/ambientales" }
+        ]
+      },
+      "2230": {
+        title: "2230 Depleted Brine Treatment", links: [
+          { text: "Parámetros del Proceso", href: "#/dash/2230/proceso" }
+        ]
+      },
+      "6100": {
+        title: "6100 Depleted Brine Lagoon", links: [
+          { text: "Volumen y Niveles", href: "#/dash/6100/volumen" }
+        ]
+      },
+      "2110": {
+        title: "2110 Brine Oxidation", links: [
+          { text: "Eficiencia de Oxidación", href: "#/dash/2110/eficiencia" }
+        ]
+      },
+      "2120": {
+        title: "2120 Brine Filtration", links: [
+          { text: "Delta-P y Flujo", href: "#/dash/2120/dp-flujo" }
+        ]
+      },
+      "2130": {
+        title: "2130 CO2 Stripping", links: [
+          { text: "Consumo CO2", href: "#/dash/2130/consumo" }
+        ]
+      },
+      "2210": {
+        title: "2210/2220 Direct Extraction", links: [
+          { text: "Recuperación Li", href: "#/dash/2210/recuperacion" },
+          { text: "Disponibilidad Unidades", href: "#/dash/2210/disponibilidad" }
+        ]
+      },
+      "2310": {
+        title: "2310 Nanofiltration", links: [
+          { text: "Permeado/Retenido", href: "#/dash/2310/permeado" }
+        ]
+      },
+      "2360": {
+        title: "2360 Ion Exchange Upstream", links: [
+          { text: "Cargas/Descargas", href: "#/dash/2360/ciclos" }
+        ]
+      },
+      "2320": {
+        title: "2320 Reverse Osmosis", links: [
+          { text: "Rechazo y Recuperación", href: "#/dash/2320/rechazo" }
+        ]
+      },
+      "6300": {
+        title: "6300 Brine Wells", links: [
+          { text: "Producción de Salmuera", href: "#/dash/6300/produccion" },
+          { text: "Integridad de Pozos", href: "#/dash/6300/integridad" }
+        ]
+      },
+      "2500": {
+        title: "2500 Boron Solvent Extraction", links: [
+          { text: "Extracción Boro", href: "#/dash/2500/extraccion" }
+        ]
+      },
+      "3110a": {
+        title: "3110 As Removal", links: [
+          { text: "Remoción Arsénico", href: "#/dash/3110/as-removal" }
+        ]
+      },
+      "3110b": {
+        title: "3110 Ion Exchange Ca/Mg", links: [
+          { text: "Intercambio iónico Ca/Mg", href: "#/dash/3110/ca-mg" }
+        ]
+      },
+      "3310": {
+        title: "3310 Li2CO3 Precipitation", links: [
+          { text: "Producción Carbonato", href: "#/dash/3310/produccion" },
+          { text: "Eficiencia Reactor", href: "#/dash/3310/eficiencia" }
+        ]
+      },
+      "3410": {
+        title: "3410 Li2CO3 Centrifugation", links: [
+          { text: "Rendimiento Centrífuga", href: "#/dash/3410/rendimiento" }
+        ]
+      },
+      "3420": {
+        title: "3420 Li2CO3 Dryer", links: [
+          { text: "Curvas de Secado", href: "#/dash/3420/curvas" }
+        ]
+      },
+      "3430": {
+        title: "3430 Li2CO3 Micronization", links: [
+          { text: "Distribución de Partícula", href: "#/dash/3430/psd" }
+        ]
+      },
+      "3510": {
+        title: "3510 Li2CO3 Packaging & Storage", links: [
+          { text: "Packing & Stock", href: "#/dash/3510/stock" }
+        ]
+      },
+      "3210": {
+        title: "3210 Na2CO3 Purification", links: [
+          { text: "Pureza y Consumo", href: "#/dash/3210/pureza" }
+        ]
+      },
+      "general": {
+        title: "General", links: [
+          { text: "Dashboard Global", href: "#/dash/general/global" },
+          { text: "KPIs Ambientales", href: "#/dash/general/kpis-ambientales" },
+          { text: "Seguridad Planta", href: "#/dash/general/seguridad" },
+          { text: "Operaciones - Resumen", href: "#/dash/general/ops" },
+          { text: "Mantenimiento - Resumen", href: "#/dash/general/mant" }
+        ]
+      }
+    };
+
+    // add new sections without touching original ones
+    Object.assign(menus, {
+      "training": {
+        title: "Training Center", links: [
+          { text: "Courses Dashboard", href: "#/dash/training/courses" },
+          { text: "Attendance", href: "#/dash/training/attendance" }
+        ]
+      },
+      "quality": {
+        title: "Quality", links: [
+          { text: "Quality KPIs", href: "#/dash/quality/kpis" },
+          { text: "Defect Tracking", href: "#/dash/quality/defects" }
+        ]
+      },
+      "lab": {
+        title: "Laboratory", links: [
+          { text: "Lab Results", href: "#/dash/lab/results" },
+          { text: "Sample Tracking", href: "#/dash/lab/samples" }
+        ]
+      }
+    });
+
+    // =======================
+    // MENÚ FLOTANTE PEGADO
+    // =======================
+    function closeAllFlyouts() {
+      document.querySelectorAll('.flyout').forEach(f => f.remove());
+    }
+
+    function buildFlyout(key) {
+      const data = menus[key];
+      if (!data) return null;
+      const el = document.createElement('div');
+      el.className = 'flyout';
+      el.innerHTML = `
+        <h4>${data.title}</h4>
+        <ul>
+          ${data.links.map(l => `<li><a href="${l.href}">${l.text}</a></li>`).join('')}
+        </ul>`;
+      // stop clicks inside the flyout bubbling up
+      el.addEventListener('click', e => e.stopPropagation());
+      return el;
+    }
+
+    // Abrir flyout desde subitem (ORIGINAL: intacto)
+    document.querySelectorAll('.subitem').forEach(sub => {
+      sub.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const key = sub.dataset.key;
+
+        // Cerrar otros
+        closeAllFlyouts();
+
+        const menu = buildFlyout(key);
+        if (!menu) return;
+
+        // añadir al body para no quedar atrapado por stacking context
+        document.body.appendChild(menu);
+        menu.style.display = 'block';
+        menu.style.position = 'absolute';
+        menu.style.zIndex = 9999;
+
+        // calcular posición pegada al subitem
+        const rect = sub.getBoundingClientRect();
+        menu.style.top = (rect.top + window.scrollY) + 'px';
+        menu.style.left = (rect.right + 8 + window.scrollX) + 'px';
+      });
+    });
+
+    // Botón General centrado (ORIGINAL: intacto)
+    document.getElementById('btnGeneral').addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeAllFlyouts();
+      const btn = e.currentTarget;
+      const menu = buildFlyout('general');
+      if (!menu) return;
+      menu.classList.add('no-arrow');
+      menu.style.position = 'absolute';
+      menu.style.display = 'block';
+      menu.style.width = 'min(420px, 92vw)';
+      menu.style.zIndex = 60;
+      document.body.appendChild(menu);
+
+      // calcular posición centrada respecto al botón
+      const btnRect = btn.getBoundingClientRect();
+      const menuW = menu.offsetWidth;
+      const left = Math.max(8, Math.round(btnRect.left + window.scrollX + (btnRect.width / 2) - (menuW / 2)));
+      const top = Math.round(btnRect.bottom + window.scrollY + 10);
+      menu.style.left = left + 'px';
+      menu.style.top = top + 'px';
+    });
+
+    // NUEVOS botones (Training, Quality, Lab) – se evita duplicar #btnGeneral
+    document.querySelectorAll('.btn-general').forEach(btn => {
+      if (btn.id === 'btnGeneral') return; // el original ya tiene su handler
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        closeAllFlyouts();
+        const key = btn.dataset.key;
+        const menu = buildFlyout(key);
+        if (!menu) return;
+        menu.classList.add('no-arrow');
+        menu.style.position = 'absolute';
+        menu.style.display = 'block';
+        menu.style.width = 'min(420px, 92vw)';
+        menu.style.zIndex = 60;
+        document.body.appendChild(menu);
+
+        const rect = btn.getBoundingClientRect();
+        const left = Math.max(8, Math.round(rect.left + window.scrollX + rect.width / 2 - menu.offsetWidth / 2));
+        const top = Math.round(rect.bottom + window.scrollY + 10);
+        menu.style.left = left + 'px';
+        menu.style.top = top + 'px';
+      });
+    });
+
+    // Cerrar si se hace click fuera
+    document.addEventListener('click', () => {
+      closeAllFlyouts();
+    });
+
+    // =======================
+    // BUSCADOR DE DASHBOARDS
+    // =======================
+    const searchInput = document.getElementById('searchInput');
+    const resultsBox = document.getElementById('resultsBox');
+    const resultsList = document.getElementById('resultsList');
+
+    function allDashItems() {
+      const out = [];
+      for (const [key, conf] of Object.entries(menus)) {
+        conf.links.forEach(l => {
+          out.push({ section: conf.title, text: l.text, href: l.href, key });
+        });
+      }
+      return out;
+    }
+
+    const INDEX = allDashItems();
+
+    searchInput.addEventListener('input', () => {
+      const q = searchInput.value.trim().toLowerCase();
+      resultsList.innerHTML = '';
+      if (!q) { resultsBox.style.display = 'none'; return; }
+
+      const matched = INDEX.filter(i =>
+        i.text.toLowerCase().includes(q) || i.section.toLowerCase().includes(q)
+      ).slice(0, 30);
+
+      if (!matched.length) {
+        resultsList.innerHTML = '<li>No se encontraron resultados</li>';
+        resultsBox.style.display = 'block';
+        return;
+      }
+
+      matched.forEach(m => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${m.href}">${m.text}</a> <small style="opacity:.7">(${m.section})</small>`;
+        resultsList.appendChild(li);
+      });
+      resultsBox.style.display = 'block';
+    });
+  </script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    // ======= PRODUCTION CHART LOGIC =======
+    const ctx = document.getElementById('prodChart');
+
+    // Utilidad: genera acumulado desde serie diaria
+    function cumulative(arr){
+      const out=[]; let s=0; for(const v of arr){ s += (Number(v)||0); out.push(+s.toFixed(3)); } return out;
+    }
+
+    // Colores (paleta)
+    const COLORS = {
+      daily: getComputedStyle(document.documentElement).getPropertyValue('--orange').trim() || '#FA6414',
+      cum: getComputedStyle(document.documentElement).getPropertyValue('--indigo').trim() || '#6D1ADC',
+      target: getComputedStyle(document.documentElement).getPropertyValue('--lemon').trim() || '#FBF315',
+      navy: getComputedStyle(document.documentElement).getPropertyValue('--navy').trim() || '#182C53'
+    };
+
+    // Dataset base
+    const SAMPLE = {
+      labels: [
+        '01/09','02/09','03/09','04/09','05/09','06/09','07/09'
+      ],
+      daily: [2.0, 23.0, 38.5, 28.5, 37.0, 26.5, 33.0],
+      goal: 840 // toneladas objetivo del mes (ejemplo)
+    };
+
+    // Construye gráfico
+    let prodChart;
+    function buildProdChart(data=SAMPLE){
+      const cum = cumulative(data.daily);
+      const labels = data.labels;
+      const goalLine = labels.map(()=> data.goal);
+
+      const cfg = {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [
+            {
+              type: 'bar',
+              label: 'Producción diaria (t)',
+              data: data.daily,
+              borderWidth: 0,
+              backgroundColor: COLORS.daily,
+              yAxisID: 'y'
+            },
+            {
+              type: 'line',
+              label: 'Acumulado (t)',
+              data: cum,
+              borderColor: COLORS.cum,
+              backgroundColor: COLORS.cum,
+              borderWidth: 3,
+              pointRadius: 3,
+              tension: 0.25,
+              yAxisID: 'y1'
+            },
+            {
+              type: 'line',
+              label: 'Objetivo (t)',
+              data: goalLine,
+              borderColor: COLORS.target,
+              backgroundColor: COLORS.target,
+              borderDash: [6,6],
+              borderWidth: 2,
+              pointRadius: 0,
+              yAxisID: 'y1'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx)=>{
+                  const v = ctx.parsed.y;
+                  return `${ctx.dataset.label}: ${v?.toLocaleString('es-AR', {maximumFractionDigits:1})}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: { maxRotation: 0, autoSkip: true }
+            },
+            y: {
+              position: 'left',
+              title: { display: true, text: 'Producción diaria (t)' },
+              beginAtZero: true
+            },
+            y1: {
+              position: 'right',
+              grid: { drawOnChartArea: false },
+              title: { display: true, text: 'Acumulado / Objetivo (t)' },
+              beginAtZero: true
+            }
+          }
+        }
+      };
+
+      if (prodChart) { prodChart.destroy(); }
+      prodChart = new Chart(ctx, cfg);
+    }
+
+    // API pública para actualizar desde backend
+    // Ejemplo: updateProductionChart({ labels: [...], daily: [...], goal: 900 })
+    window.updateProductionChart = function(payload){
+      const data = {
+        labels: payload.labels || SAMPLE.labels,
+        daily: payload.daily || SAMPLE.daily,
+        goal: payload.goal ?? SAMPLE.goal
+      };
+      buildProdChart(data);
+    }
+
+    // inicializar con SAMPLE
+    buildProdChart();
+  </script>
+
+</body>
+
+</html>
